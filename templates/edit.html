@@ -4,6 +4,10 @@
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <script type="text/javascript">
         var editElem = document.getElementById("editt");
         editElem.contentEditable = "true";
@@ -11,7 +15,7 @@
 </head>
 
 <body>
-    <p>Editing of <b>{{.Name}}</b> GP</p>
+    <p>Editing of<b>{{.Name}}</b> GP</p>
     {{range .Lists}}
     <form method="POST" action="/update?id={{.Id}}&listid={{.ListID}}">
         <input type="hidden" name="gpname" value="{{ .ListName }}" />
@@ -20,10 +24,32 @@
         <p>Date:<input type="text" name="date" value="{{ .Date }}" /></p>
         <br>
         <input class="btn btn-primary" type="submit" value="Save">
-        <!--<a href="/copy?id={{.ListID}}"><input type="submit" value="Copy" /></a>-->
         <a class="btn btn-primary" href="/copy?id={{.Id}}&name={{.ListName}}" role="button">Copy</a>
-        <a class="btn btn-primary" href="/delete?id={{.Id}}&listid={{.ListID}}" role="button">Delete</a>
-        <!--<a href="/delete?id={{.Id}}&listid={{.ListID}}"><input type="button" value="Delete" /></a>-->
+        <!--<a class="btn btn-primary" href="/delete?id={{.Id}}&listid={{.ListID}}" role="button">Delete</a>-->
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{.Id}}" aria-label="Delete">Delete</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="delete{{.Id}}" tabindex="-1" role="dialog" aria-labelledby="deleteLabel{{.Id}}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteLabel{{.Id}}">Are You shure?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                    </div>
+                    <div class="modal-body">
+                        You want to delete
+                        <B>{{.Name}}</B> GPO.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-danger" href="/delete?id={{.Id}}&listid={{.ListID}}" role="button">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </form> {{end}}
     <a class="btn btn-primary" href="/" role="button">Back</a>
     <a class="btn btn-primary" href="/new?id={{.Id}}" role="button">Add</a>
