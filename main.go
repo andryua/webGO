@@ -40,8 +40,8 @@ func index (w http.ResponseWriter, r *http.Request) {
 		tmp = append(tmp, ls)
 	}
 	defer db.Close()
-	t := template.Must(template.ParseFiles("./templates/list1.html"))
-	t.ExecuteTemplate(w, "list1",&tmp)
+	t := template.Must(template.ParseFiles("./templates/list.html"))
+	t.ExecuteTemplate(w, "list",&tmp)
 }
 
 func edit (w http.ResponseWriter, r *http.Request) {
