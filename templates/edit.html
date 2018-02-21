@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script type="text/javascript">
         var editElem = document.getElementById("editt");
@@ -15,7 +16,7 @@
 </head>
 
 <body>
-    <p>Editing of<b>{{.Name}}</b> GP</p>
+    <p>Editing of <b>{{.Name}}</b> GP</p>
     {{range .Lists}}
     <form method="POST" action="/update?id={{.Id}}&listid={{.ListID}}">
         <input type="hidden" name="gpname" value="{{ .ListName }}" />
@@ -23,10 +24,10 @@
         <p>Source:<input type="text" name="source" value="{{ .Source }}" /></p>
         <p>Date:<input type="text" name="date" value="{{ .Date }}" /></p>
         <br>
-        <input class="btn btn-primary" type="submit" value="Save">
-        <a class="btn btn-primary" href="/copy?id={{.Id}}&name={{.ListName}}" role="button">Copy</a>
+        <i class="material-icons md-18"><input class="btn btn-primary" type="submit" value="save"></i>
+        <a class="btn btn-primary" href="/copy?id={{.Id}}&name={{.ListName}}" role="button"><i class="material-icons md-18">content_copy</i></a>
         <!--<a class="btn btn-primary" href="/delete?id={{.Id}}&listid={{.ListID}}" role="button">Delete</a>-->
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{.Id}}" aria-label="Delete">Delete</button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{.Id}}" aria-label="Delete"><i class="material-icons md-18">delete_forever</i></button>
 
         <!-- Modal -->
         <div class="modal fade" id="delete{{.Id}}" tabindex="-1" role="dialog" aria-labelledby="deleteLabel{{.Id}}" aria-hidden="true">
@@ -51,8 +52,8 @@
         </div>
 
     </form> {{end}}
-    <a class="btn btn-primary" href="/" role="button">Back</a>
-    <a class="btn btn-primary" href="/new?id={{.Id}}" role="button">Add</a>
+    <a class="btn btn-primary" href="/" role="button"><i class="material-icons md-18">navigate_before</i></a>
+    <a class="btn btn-primary" href="/new?id={{.Id}}" role="button"><i class="material-icons md-18">add_box</i></a>
 </body>
 
 </html>

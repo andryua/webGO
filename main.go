@@ -9,7 +9,7 @@ import (
 	//"os"
 
 	_ "github.com/mattn/go-sqlite3"
-	"fmt"
+//	"fmt"
 //	"path/filepath"
 //	"strings"
 )
@@ -204,7 +204,7 @@ func export (w http.ResponseWriter, r *http.Request) {
 	for i := 0; i < len(tmp); i++ {
 		s += tmp[i].Name + "\n" + tmp[i].Source + "\n" + "\n"
 	}
-	fmt.Println(s,id)
+	//fmt.Println(s,id)
 	w.Header().Set("Content-Disposition", "attachment; filename="+tmp[0].ListName+".log")
 	w.Header().Set("Content-Type","text/plain")
 	w.Write([]byte(s))
