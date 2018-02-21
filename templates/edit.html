@@ -1,0 +1,34 @@
+{{define "edit"}}
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript">
+        var editElem = document.getElementById("editt");
+        editElem.contentEditable = "true";
+    </script>
+</head>
+
+<body>
+    <p>Editing of <b>{{.Name}}</b> GP</p>
+    {{range .Lists}}
+    <form method="POST" action="/update?id={{.Id}}&listid={{.ListID}}">
+        <input type="hidden" name="gpname" value="{{ .ListName }}" />
+        <p>Name:<input type="text" name="name" value="{{ .Name }}" /></p>
+        <p>Source:<input type="text" name="source" value="{{ .Source }}" /></p>
+        <p>Date:<input type="text" name="date" value="{{ .Date }}" /></p>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Save">
+        <!--<a href="/copy?id={{.ListID}}"><input type="submit" value="Copy" /></a>-->
+        <a class="btn btn-primary" href="/copy?id={{.Id}}&name={{.ListName}}" role="button">Copy</a>
+        <a class="btn btn-primary" href="/delete?id={{.Id}}&listid={{.ListID}}" role="button">Delete</a>
+        <!--<a href="/delete?id={{.Id}}&listid={{.ListID}}"><input type="button" value="Delete" /></a>-->
+    </form> {{end}}
+    <a class="btn btn-primary" href="/" role="button">Back</a>
+    <a class="btn btn-primary" href="/new?id={{.Id}}" role="button">Add</a>
+</body>
+
+</html>
+
+{{end}}
